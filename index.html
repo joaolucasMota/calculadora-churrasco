@@ -1,11 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Calculadora de Churrasco</title>
 </head>
+
 <body>
-    
+
+    <h1>Calculadora de churrasco</h1>
+
+    <button class="btnNovoPedido" onclick="novoPedido()">Criar novo churrasco</button>
+
+    <table id="tabela">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Quantidade de Pessoas</th>
+                <th>Carne</th>
+                <th>Pão de Alho</th>
+                <th>Carvão</th>
+                <th>Refri</th>
+                <th>Cerveja</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody id="dadosTabela">
+        </tbody>
+    </table>
+
+
+
+
+    <script src="classe.js"></script>
+
+    <script>
+
+        window.onload = function () {
+            const tabelaBody = document.getElementById('dadosTabela');
+
+            fetch('http://localhost:3000/churrascos')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach((dado) => {
+                        const td = document.createElement('tr');
+
+                        td.innerHTML = `
+                            <td>${dado.data}</td>
+                            <td>${dado.totalAdultos}</td>
+                            <td>${dado.totalCarne}</td>
+                            <td>${dado.totalPaoDeAlho}</td>
+                            <td>${dado.totalCarvao}</td>
+                            <td>${dado.totalRefrigerante}</td>
+                            <td>${dado.totalCerveja}</td>
+                            <td>
+                                <button class="btn btn-editar" onclick="editarChurrasco(${dado.id})">Editar</button>
+                                <button class="btn btn-excluir" onclick="excluirChurrasco(${dado.id})">Excluir</button>
+                            </td>
+                        `;
+
+                        tabelaBody.appendChild(td);
+                    })
+
+                })
+                .catch(error => {
+
+                    console.error('Erro na requisição:', error);
+                });
+        }
+
+        function editarChurrasco(id) {
+
+            console.log('Editar churrasco com ID:', id);
+        }
+
+        function excluirChurrasco(id) {
+
+            fetch(`http://localhost:3000/churrascos/${id}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao excluir churrasco');
+                }
+                console.log('Churrasco excluído com sucesso!');
+            })
+            .catch(error => {
+                console.log('Erro ao excluir churrasco:', error);
+            });
+        }
+    </script>
 </body>
+
 </html>

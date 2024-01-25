@@ -5,6 +5,11 @@ class Churrasco {
         this.criancas = criancas;
     }
 
+    parametrosEdit() {
+        const obj = {"homens" : this.homens, "mulheres" : this.mulheres, "criancas" : this.criancas}
+        return obj
+    }
+
     totalAdultos() {
         const adultos = this.homens + this.mulheres;
         return adultos;
@@ -52,10 +57,10 @@ class Churrasco {
     data(){
         const dataAtual = new Date();
         const dia = dataAtual.getDate();
-        const mes = dataAtual.getMonth();
+        const mes = dataAtual.getMonth() +1;
         const ano = dataAtual.getFullYear();
         const resultado = `${dia}/${mes}/${ano}`;
-        return dataAtual;
+        return resultado;
     }
 
     calcularTodos(){
@@ -67,6 +72,7 @@ class Churrasco {
         const calcularCerveja = this.calcularCerveja();
         const calcularRefrigerante = this.calcularRefrigerante();
         const data = this.data();
+        const parametrosEdit = this.parametrosEdit();
         
         const obj = {
             totalAdultos : totalAdultos,
@@ -76,7 +82,8 @@ class Churrasco {
             totalCarne : calcularCarne,
             totalCerveja : calcularCerveja,
             totalRefrigerante : calcularRefrigerante,
-            data : data
+            data : data,
+            parametrosEdit : parametrosEdit
         }
 
         return  obj

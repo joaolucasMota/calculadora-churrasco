@@ -7,16 +7,16 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <title>Cadastro</title>
+  <title>Edição de Churrasco</title>
 
   <script src="classe.js"></script>
 </head>
 
 <body >
   <main class="main-container">
-    <h2 class="title">Cadastro de churrasco</h2>
+    <h2 class="title">Edição de churrasco</h2>
   <section class="form-container">
-    <h4>Informe a quantidade de pessoas:</h4>
+    <h4 >Informe a quantidade de pessoas:</h4>
     <form>
       <label class="form-label" for="qtdHomens">Quantidade de Homens:</label>
       <input class="form-input" type="number" id="qtdHomens" name="qtdHomens" min="0">
@@ -27,37 +27,50 @@
       <label class="form-label" for="qtdCriancas">Quantidade de Crianças:</label>
       <input class="form-input" id="qtdCriancas" name="qtdCriancas" min="0">
 
-      <button class="form-button" type="button" onclick="calcularChurrasco()">Finalizar</button>
+      <button class="form-button" type="button" onclick="editarChurrasco()">Salvar Edição</button>
     </form>
   </section>
 </main>
 
   <script>
-    function calcularChurrasco() {
+    const params = new URLSearchParams(window.location.search);
+    const churrascoId = params.get('id');
+
+    fetch(`http://localhost:3000/churrascos/${churrascoId}`)
+      .then(response => response.json())
+      .then(churrasco => {
+        document.getElementById("qtdHomens").value = churrasco.parametrosEdit.homens;
+        document.getElementById("qtdeMulheres").value = churrasco.parametrosEdit.mulheres;
+        document.getElementById("qtdCriancas").value = churrasco.parametrosEdit.criancas;
+      })
+      .catch(error => {
+        console.error('Erro ao obter detalhes do churrasco:', error);
+      });
+
+    function editarChurrasco() {
       const homens = parseInt(document.getElementById("qtdHomens").value);
       const mulheres = parseInt(document.getElementById("qtdeMulheres").value);
       const criancas = parseInt(document.getElementById("qtdCriancas").value);
-      
-      const churrascoDoFimDeSemana = new Churrasco(homens, mulheres, criancas);
 
-      const resultado = churrascoDoFimDeSemana.calcularTodos();
+      const churrascoEditado = new Churrasco(homens, mulheres, criancas);
+      const resultadoEditado = churrascoEditado.calcularTodos();
 
-
-      fetch('http://localhost:3000/churrascos', {
-        method: 'POST',
+      fetch(`http://localhost:3000/churrascos/${churrascoId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(resultado),
+        body: JSON.stringify(resultadoEditado),
       })
         .then(response => response.json())
         .then(data => {
-          console.log('Churrasco criado no servidor:', data);
+          console.log('Churrasco editado no servidor:', data);
           window.location.href = 'index.html';
+          alert("Churrasco editado com sucesso!");
         })
         .catch(error => {
-          console.error('Erro ao criar churrasco no servidor:', error);
-          alert("Erro ao criar churrasco no servidor")
+          console.error('Erro ao editar churrasco no servidor:', error);
+          alert("Erro ao editar churrasco no servidor");
           window.location.href = 'index.html';
         });
     }

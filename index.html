@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <title>Calculadora de Churrasco</title>
 </head>
 
@@ -50,14 +52,14 @@
                         td.innerHTML = `
                             <td>${dado.data}</td>
                             <td>${dado.totalAdultos}</td>
-                            <td>${dado.totalCarne}</td>
+                            <td>${dado.totalCarne.toFixed(2)}</td>
                             <td>${dado.totalPaoDeAlho}</td>
                             <td>${dado.totalCarvao}</td>
                             <td>${dado.totalRefrigerante}</td>
                             <td>${dado.totalCerveja}</td>
                             <td>
-                                <button class="btn btn-editar" onclick="editarChurrasco(${dado.id})">Editar</button>
-                                <button class="btn btn-excluir" onclick="excluirChurrasco(${dado.id})">Excluir</button>
+                                <button class="btn btn-editar" onclick="editarChurrasco('${dado.id}')">Editar</button>
+                                <button class="btn btn-excluir" onclick="excluirChurrasco('${dado.id}')">Excluir</button>
                             </td>
                         `;
 
@@ -72,24 +74,27 @@
         }
 
         function editarChurrasco(id) {
-
-            console.log('Editar churrasco com ID:', id);
-        }
+        window.location.href = `formEdicao.html?id=${id}`;
+    }
 
         function excluirChurrasco(id) {
-
             fetch(`http://localhost:3000/churrascos/${id}`, {
                 method: 'DELETE',
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao excluir churrasco');
-                }
-                console.log('Churrasco excluído com sucesso!');
-            })
-            .catch(error => {
-                console.log('Erro ao excluir churrasco:', error);
-            });
+                .then(response => {
+                    if (response.status === 204) {
+                        console.log('Churrasco excluído com sucesso!');
+                    } else {
+                        throw new Error('Erro ao excluir churrasco');
+                    }
+                })
+                .catch(error => {
+                    console.log('Erro ao excluir churrasco:', error);
+                });
+        }
+
+        function novoPedido() {
+            location.href = 'formCadastro.html';
         }
     </script>
 </body>

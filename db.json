@@ -1,36 +1,36 @@
 {
   "churrascos": [
     {
-      "totalAdultos": 0,
-      "totalPessoas": 0,
-      "totalPaoDeAlho": 0,
-      "totalCarvao": 0,
-      "totalCarne": 0,
-      "totalCerveja": 0,
-      "totalRefrigerante": 0,
-      "data": "24/1/2024",
-      "parametrosEdit": {
-        "homens": 0,
-        "mulheres": 0,
-        "criancas": 0
-      },
-      "id": "4e69"
-    },
-    {
-      "id": "0a22",
-      "totalAdultos": 5,
-      "totalPessoas": 9,
-      "totalPaoDeAlho": 14,
-      "totalCarvao": 9,
-      "totalCarne": 2.56,
-      "totalCerveja": 15,
+      "totalAdultos": 4,
+      "totalPessoas": 6,
+      "totalPaoDeAlho": 10,
+      "totalCarvao": 6,
+      "totalCarne": 1.8399999999999999,
+      "totalCerveja": 12,
       "totalRefrigerante": 2,
       "data": "24/1/2024",
       "parametrosEdit": {
         "homens": 2,
-        "mulheres": 3,
-        "criancas": 4
-      }
+        "mulheres": 2,
+        "criancas": 2
+      },
+      "id": "4e69"
+    },
+    {
+      "totalAdultos": 60,
+      "totalPessoas": 90,
+      "totalPaoDeAlho": 150,
+      "totalCarvao": 90,
+      "totalCarne": 27.6,
+      "totalCerveja": 180,
+      "totalRefrigerante": 18,
+      "data": "24/1/2024",
+      "parametrosEdit": {
+        "homens": 30,
+        "mulheres": 30,
+        "criancas": 30
+      },
+      "id": "0a22"
     },
     {
       "id": "c17b",

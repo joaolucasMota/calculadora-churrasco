@@ -31,6 +31,22 @@
         "mulheres": 3,
         "criancas": 4
       }
+    },
+    {
+      "id": "c17b",
+      "totalAdultos": 40,
+      "totalPessoas": 60,
+      "totalPaoDeAlho": 100,
+      "totalCarvao": 60,
+      "totalCarne": 18.4,
+      "totalCerveja": 120,
+      "totalRefrigerante": 12,
+      "data": "24/1/2024",
+      "parametrosEdit": {
+        "homens": 20,
+        "mulheres": 20,
+        "criancas": 20
+      }
     }
   ]
 }

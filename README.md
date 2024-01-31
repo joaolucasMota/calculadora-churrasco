@@ -24,7 +24,8 @@ A função principal é calcular os itens de um churrasco de acordo com o numero
 
 
 
-##Alunos
+## 👨 Alunos
+
 <h3>Antônio Candido</h3>
 <h3>João Lucas Mota</h3>
 <h3>José Weverton</h3>
